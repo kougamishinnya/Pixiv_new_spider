@@ -1,7 +1,7 @@
 
 # Pixiv web crawler
 
-##1:   Rank mode
+1:   Rank mode
     1： All rank
         - mode
             - daily
@@ -21,14 +21,14 @@
           please input the maximum number of single page downloads.
     2：In all modes, you can select the number of top downloads
             
-##2:   Artist mode
+2:   Artist mode
 
 # Pixiv爬虫
 
-##1：排行榜模式
+1：排行榜模式
     1：综合排行榜
          模式
-             日榜为输入日期
+             /n日榜为输入日期
              周榜为输入日期向前推一周，比如输入20200807则为20200801~20200807
              月榜同理，向前推一个月
              新人排行
