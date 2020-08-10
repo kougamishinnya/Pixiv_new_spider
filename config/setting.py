@@ -8,8 +8,8 @@ import os
 PATH = '/Volumes/Extreme SSD'
 
 #  Default parameters
-username = None
-password = None
+username = 'mashiro980107@gmail.com'
+password = 'iloveyou123'
 myuser_id = '15691732'
 
 headers_list = [  # User-Agent setting
