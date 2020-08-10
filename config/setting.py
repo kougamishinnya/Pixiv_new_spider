@@ -8,9 +8,9 @@ import os
 PATH = '/Volumes/Extreme SSD'
 
 #  Default parameters
-username = 'mashiro980107@gmail.com'
-password = 'iloveyou123'
-myuser_id = '15691732'
+username = None
+password = None
+myuser_id = None
 
 headers_list = [  # User-Agent setting
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15',
