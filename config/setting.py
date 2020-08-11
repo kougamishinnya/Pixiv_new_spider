@@ -5,12 +5,12 @@ import os
 #     os.path.dirname(__file__)
 # )
 
+# Download path
 PATH = '/Volumes/Extreme SSD'
 
-#  Default parameters
+# 自分のアカウントを入力
 username = None
 password = None
-myuser_id = None
 
 headers_list = [  # User-Agent setting
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15',
@@ -20,6 +20,8 @@ headers_list = [  # User-Agent setting
     'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0'
 ]
 
+url_rank = 'https://www.pixiv.net/ranking.php?'
+
 headers = {
     'User-Agent': random.choice(headers_list),
     'referer': 'https://www.pixiv.net',
@@ -28,5 +30,9 @@ headers = {
     # 'cookie': get_cookie(),
 }
 
-
-
+path = os.path.dirname(
+    os.path.dirname(__file__)
+)
+path = os.path.join(
+    path, 'config', 'config.json'
+)

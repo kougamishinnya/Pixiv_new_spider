@@ -1,28 +1,21 @@
 import requests
 import json
-from lib import common
-from time import sleep
 import time
-from config.setting import *
-import random
 import math
 from multiprocessing.dummy import Pool
 
-url_rank = 'https://www.pixiv.net/ranking.php?'
-img_path = ''
-proxy = common.get_ips()
+from config.setting import *
+from lib.get_ips import get_ips
+from time import sleep
+
+proxy = get_ips()  # proxt listをとる
 
 
 def get_rank_id_list(date, number, mode, content=None):  # ランキングのイラストIDを獲得
     global img_path
     # URL引数の設定
-    params_rank = {
-        'mode': 'daily',
-        'content': 'illust',
-        'date': '',
-        'p': '1',
-        'format': 'json',
-    }
+
+    params_rank = {'mode': 'daily', 'content': 'illust', 'date': '', 'p': '1', 'format': 'json'}
     headers['referer'] = 'https://www.pixiv.net/ranking.php'
     params_rank['mode'] = mode
     if content is None:
@@ -65,19 +58,32 @@ def liked_user_illustlist(likedUser_id):
     global img_path
     likedUser_id = str(likedUser_id)
     illust_id_list = []
+    # headers['sec-fetch-site']= 'same-origin'
+    # headers['sec-fetch-mode'] = 'cors'
+    # headers['sec-fetch-dest'] = 'empty'
     '''
     ここはログインが必要だから、get_cookieを使う、そして、x-user-idは自分のアカウントのID
     もう一つ重要な引数はreferer,これはこのrequestsするページの前のページです
     '''
     start_time = time.time()
-    headers['cookie'] = common.get_cookie(likedUser_id)
-    if headers['cookie']:
-        print('Cookie get successful')
-    headers['x-user-id'] = myuser_id
+    if not os.path.exists(path):
+        from lib.get_data import get_data
+        cookie, user_id = get_data(likedUser_id)
+        headers['cookie'] = cookie
+        headers['x-user-id'] = user_id
+        with open(path, 'w+') as f:
+            data = {
+                'cookie': cookie,
+                'user_id': user_id
+            }
+            json.dump(data, f)
+    else:
+        with open(path, 'r') as f:
+            config = json.load(f)
+            headers['cookie'] = config['cookie']
+            headers['x-user-id'] = config['user_id']
+
     headers['referer'] = 'https://www.pixiv.net/users/' + likedUser_id
-    # headers['sec-fetch-site']= 'same-origin'
-    # headers['sec-fetch-mode'] = 'cors'
-    # headers['sec-fetch-dest'] = 'empty'
     json_url = 'https://www.pixiv.net/ajax/user/' + likedUser_id + '/profile/all?lang=en'
     try:
         json_load = requests.get(url=json_url, headers=headers, proxies=random.choice(proxy))
@@ -95,7 +101,8 @@ def liked_user_illustlist(likedUser_id):
             if not os.path.exists(img_path):
                 os.makedirs(img_path)
             end_time = time.time()
-            print(f"Geted {len(illust_id_list)} illust id of artist_id : {likedUser_id}\nIt took {end_time - start_time} seconds")
+            print(
+                f"Geted {len(illust_id_list)} illust id of artist_id : {likedUser_id}\nIt took {end_time - start_time} seconds")
             return illust_id_list  # id list
         else:
             print("Get liked user illust list Error")
@@ -144,19 +151,24 @@ def download_pic(url):  # 引数はオリジナルイラストのURL
                 print(f'Img {title} save error')
 
 
-def all_download(url_list):
+def all_download(id_list):
     pool_num = 8
     pool = Pool(pool_num)  # poolを使う
-    original_list = pool.map(get_original_url, url_list)  # マルチスレッド
+    original_list = pool.map(get_original_url, id_list)  # マルチスレッド
     the_original_list = []
     max_num = int(input('Please enter the max of downloads one illust page\n---->'))
-    for id_url_list in original_list:
-        if len(id_url_list) > max_num:
+    for url_list in original_list:
+        if len(url_list) > max_num:
             continue
         else:
-            for ori_url in id_url_list:
+            for ori_url in url_list:
                 the_original_list.append(ori_url)
     pool.map(download_pic, the_original_list)  # マルチスレッド ダウンロード
     print(f"Illust download successful,downloads {len(the_original_list)} illusts")
     pool.close()  # Close pool
     pool.join()
+
+
+# if __name__ == "__main__":
+    # id_list = liked_user_illustlist('6662895')
+    # print(id_list)

@@ -76,6 +76,7 @@ func_dic = {
     '2': ['Artist mode', liked_artist_mode],
 }
 
+
 def run():
     global func_dic
     while True:
@@ -84,6 +85,6 @@ def run():
             print(f"    {key} : {value[0]}")
         print("\n=====    END   =====")
         choice = input('Please enter a number, or enter 0 to quit').strip()
-        if choice=='0':
+        if choice == '0':
             break
         func_dic[choice][1]()

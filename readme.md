@@ -4,19 +4,19 @@
 1:   Rank mode
 ---------------
     1： All rank
-        - mode
-            - daily
-            - weekly
-            - monthly
-            - rookie
-            - male
-            - female
+         mode
+             daily
+             weekly
+             monthly
+             rookie
+             male
+             female
     2: illust rank
-        - mode
-            - daily
-            - weekly
-            - monthly
-            - rookie
+         mode
+             daily
+             weekly
+             monthly
+             rookie
     PS：
     1：In all modes have a single ID page maximum download settings,
           please input the maximum number of single page downloads.
