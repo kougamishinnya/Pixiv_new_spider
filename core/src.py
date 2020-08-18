@@ -87,4 +87,5 @@ def run():
         choice = input('Please enter a number, or enter 0 to quit').strip()
         if choice == '0':
             break
-        func_dic[choice][1]()
+        else:
+            func_dic[choice][1]()

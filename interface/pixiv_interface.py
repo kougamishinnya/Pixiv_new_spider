@@ -40,7 +40,7 @@ def get_rank_id_list(date, number, mode, content=None):  # ランキングのイ
                 json_list = url_json['contents']
                 for dict in json_list:
                     user_id = dict['illust_id']
-                    number = int(number) - 1
+                    number = int(number)
                     illust_id_list.append(user_id)
                 img_path = os.path.join(
                     PATH, 'Pixiv_img/rank', date
@@ -50,6 +50,7 @@ def get_rank_id_list(date, number, mode, content=None):  # ランキングのイ
                     # if not os.path.exists(self.img_path):
                     #     os.mkdir(self.img_path)
                 return illust_id_list[0:number]  # 戻り値はイラストIDリスト
+                # return json_list
             else:
                 print(f"Get {date} json_page {i} Error")
 
@@ -170,5 +171,8 @@ def all_download(id_list):
 
 
 # if __name__ == "__main__":
-    # id_list = liked_user_illustlist('6662895')
-    # print(id_list)
+#     id_list = liked_user_illustlist('6662895')
+#     print(id_list)
+#     id_list = get_rank_id_list('20200810',50,'daily','illust')
+#     print(id_list)
+
