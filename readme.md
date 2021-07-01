@@ -56,5 +56,5 @@
     
     
     
-                                                    BY:足利大学
-                                                    MAMINGYU
+                                                                                                                                                                    ＢＹ：足利大学
+                                                                                                                                                                        MAMINGYU
