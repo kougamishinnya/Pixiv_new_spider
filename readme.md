@@ -1,6 +1,9 @@
 
 # Pixiv web crawler
 
+足利大学
+MAMINGYU
+
 1:   Rank mode
 ---------------
     1： All rank
@@ -56,5 +59,4 @@
     
     
     
-                                                                                                                                                                    ＢＹ：足利大学
-                                                                                                                                                                        MAMINGYU
+
